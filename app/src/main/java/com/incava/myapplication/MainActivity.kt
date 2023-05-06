@@ -20,27 +20,33 @@ import com.otaliastudios.zoom.ZoomSurfaceView
 class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
+        // 키오스크 Lock모드
         startLockTask()
     }
-
 
     val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        //윈도우 화면 제한 없애기
         window.setFlags(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
+        // 제생 플레이어
         val player = ExoPlayer.Builder(this).build()
         val player2 = ExoPlayer.Builder(this).build()
         val player3 = ExoPlayer.Builder(this).build()
         Log.i("layoutsize",screenXSize().toString())
         Log.i("layoutsize",screenYSize().toString())
+
+        // screenSize에 맞게 설정
         binding.playerView.player = player
         binding.playerView.layoutParams.width = screenXSize() ?: 0
         binding.playerView.layoutParams.height = screenYSize() ?: 0
         initSetPlayer(player)
+
+        // 여러 개 플레이어 재생
         binding.layout.playerView2.player = player2
         binding.layout.playerView2.setOnTouchListener {v, event->
             clickEvent(v, event)
@@ -80,19 +86,20 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "클릭 이벤트!", Toast.LENGTH_SHORT).show()
     }
 
+    // 클릭 시, actionUp 클릭에만 반응 하도록 하는 메서드.
     fun clickEvent(v : View, event : MotionEvent) : Boolean{
         Log.i("touch","${v} + ${event.action}")
         when (event.action) {
             MotionEvent.ACTION_MOVE -> {
-                // Move 이벤트는 무시합니다.
+                // Move 이벤트는 무시.
                 return false
             }
             MotionEvent.ACTION_DOWN -> {
-                // Down 이벤트는 다른 View에서 처리하도록 넘깁니다.
-                return false
+                //Down 이벤트를 받아야 Up이 실행됨. 단순 받기만 하도록 true
+                return true
             }
             MotionEvent.ACTION_UP -> {
-                // Up 이벤트는 클릭 이벤트로 처리합니다.
+                // Up 이벤트는 클릭 이벤트로 볼 수 있음.
                 performClick()
                 return true
             }

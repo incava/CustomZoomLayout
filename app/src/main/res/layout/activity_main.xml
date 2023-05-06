@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.incava.myapplication.CustomZoomLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/zoom"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical|horizontal"
+    app:alignment="none"
+    app:animationDuration="0"
+    app:flingEnabled="false"
+    app:hasClickableChildren="true"
+    app:horizontalPanEnabled="true"
+    app:maxZoom="2.5"
+    app:maxZoomType="zoom"
+    app:minZoom="1"
+    app:minZoomType="zoom"
+    app:oneFingerScrollEnabled="true"
+    app:overPinchable="false"
+    app:overScrollHorizontal="false"
+    app:overScrollVertical="false"
+    app:scrollEnabled="true"
+    app:threeFingersScrollEnabled="true"
+    app:transformation="centerCrop"
+    app:transformationGravity="auto"
+    app:twoFingersScrollEnabled="true"
+    app:verticalPanEnabled="true"
+    app:zoomEnabled="true">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.exoplayer2.ui.PlayerView
+            android:id="@+id/player_view"
+            android:layout_width="500dp"
+            android:layout_height="500dp"
+            app:use_controller="false" />
+
+        <include
+            android:id="@+id/layout"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            layout="@layout/frame_layout1" />
+
+        <include
+            android:id="@+id/layout2"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            layout="@layout/frame_layout2" />
+    </FrameLayout>
+
+</com.incava.myapplication.CustomZoomLayout>
+
+
